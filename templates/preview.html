@@ -18,15 +18,29 @@
     <title>Preview</title>
   </head>
   <body>
-    <h1>Pré-Visualização</h1>
-    <img src="{{ image_url }}" alt="Preview" />
-    <form method="POST" action="{{ url_for('save_image', image_id=image_id) }}">
-      <button type="submit" class="btn btn-success">Salvar</button>
-    </form>
-    <a
-      href="{{ url_for('delete_image_preview', image_id=image_id) }}"
-      class="btn btn-danger"
-      >Excluir</a
-    >
+    <div class="container">
+      <h1 class="mt-5">Pré-Visualização</h1>
+      <div class="mt-4">
+        <img
+          src="{{ image_url }}"
+          alt="Preview"
+          class="img-thumbnail"
+          style="max-width: 400px"
+        />
+      </div>
+      <div class="mt-4">
+        <form
+          method="POST"
+          action="{{ url_for('save_image', image_id=image_id) }}"
+        >
+          <button type="submit" class="btn btn-success">Salvar</button>
+        </form>
+        <a
+          href="{{ url_for('delete_image_preview', image_id=image_id) }}"
+          class="btn btn-danger mt-2"
+          >Excluir</a
+        >
+      </div>
+    </div>
   </body>
 </html>
