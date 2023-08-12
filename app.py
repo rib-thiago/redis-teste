@@ -5,7 +5,7 @@ from uuid import uuid4
 from io import BytesIO
 from PIL import Image
 import cv2
-import preprocess as pp
+import utilities.preprocess as pp
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static/images')
