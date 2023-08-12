@@ -68,6 +68,15 @@
               id="processedImage"
             />
           </div>
+          <div class="mt-3">
+            <button
+              onclick="saveProcessedImage('{{ image_id }}', '{{ image_url }}')"
+              class="btn btn-primary"
+              data-image-url="{{ image_url }}"
+            >
+              Save Processed Image
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -97,6 +106,28 @@
           .then((data) => {
             var processedImage = document.getElementById("processedImage");
             processedImage.src = data.processed_image_url;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      function saveProcessedImage(imageId, imageUrl) {
+        var apiUrl = "/update/" + imageId;
+
+        var formData = new FormData();
+        var newImageInput = document.querySelector('input[name="new_image"]');
+        formData.append("new_image", newImageInput.files[0]);
+        formData.append("processed_image_url", imageUrl); // Inclua a URL da imagem processada
+
+        fetch(apiUrl, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Redirecione para a página da galeria após salvar a imagem processada
+            window.location.href = "/gallery";
           })
           .catch((error) => {
             console.error("Error:", error);

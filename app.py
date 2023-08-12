@@ -135,7 +135,40 @@ def apply_method(method_name, image_id):
     cv2.imwrite(processed_image_path, processed_image)
 
     # Retorne o caminho da imagem processada como resposta
-    return jsonify({"processed_image_url": processed_image_path})
+    processed_image_url = url_for(
+        'static', filename='images/' + processed_image_filename)
+    return jsonify({"processed_image_url": processed_image_url})
+
+
+@app.route('/update/<image_id>', methods=['POST'])
+def update_image(image_id):
+    if request.method == 'POST':
+        # Verifica se a imagem com o image_id existe na galeria
+        if redis_client.lindex('gallery', 0) == image_id.encode('utf-8'):
+            # Obtém o caminho completo do arquivo de imagem existente
+            existing_image_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], image_id + '.jpg')
+
+            # Remove o arquivo de imagem existente do sistema de arquivos
+            if os.path.exists(existing_image_path):
+                os.remove(existing_image_path)
+
+            # Processa a nova imagem enviada pelo usuário
+            new_image = request.files['new_image']
+            new_image_id = str(uuid4())
+            new_image_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], new_image_id + '.jpg')
+            new_image.save(new_image_path)
+
+            # Atualiza o Redis para refletir a substituição da imagem
+            redis_client.lrem('gallery', 0, image_id)
+            redis_client.lpush('gallery', new_image_id)
+
+            return redirect(url_for('gallery'))
+        else:
+            return jsonify({"error": "Image not found in the gallery"}), 404
+    else:
+        return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
