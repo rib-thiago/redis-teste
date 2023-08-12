@@ -38,9 +38,10 @@
               <p class="card-text">Description of the method...</p>
 
               <button
-                onclick="applyMethod('{{ method_name }}')"
+                onclick="applyMethod('{{ method_name }}', '{{ method_id }}')"
                 class="apply-method-button btn btn-dark"
                 data-method-id="{{ method_id }}"
+                data-method-name="{{ method_name }}"
               >
                 Apply
               </button>
@@ -79,26 +80,28 @@
         applyMethodButtons.forEach(function (button) {
           button.addEventListener("click", function () {
             var methodId = this.getAttribute("data-method-id");
-            var imgData = "{{ image }}"; // Use a variável image diretamente
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/apply_method/" + methodId);
-            xhr.setRequestHeader(
-              "Content-Type",
-              "application/x-www-form-urlencoded"
-            );
-            xhr.onload = function () {
-              if (xhr.status === 200) {
-                document.getElementById("processedImage").innerHTML =
-                  xhr.responseText;
-              } else {
-                console.error("Error:", xhr.statusText);
-              }
-            };
-            xhr.send("img_data=" + encodeURIComponent(imgData));
+            var methodName = this.getAttribute("data-method-name"); // Adicione isso para obter o nome do método
+            applyMethod(methodName, methodId); // Passe methodName como argumento
           });
         });
       });
+
+      function applyMethod(methodName, methodId) {
+        var imageId = "{{ image_id }}";
+        var apiUrl = "/apply_method/" + methodName + "/" + imageId;
+
+        fetch(apiUrl, {
+          method: "POST",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            var processedImage = document.getElementById("processedImage");
+            processedImage.src = data.processed_image_url;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
     </script>
   </body>
 </html>

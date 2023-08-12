@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for
 import os
 import redis
 from uuid import uuid4
@@ -109,6 +109,33 @@ def edit_image(image_id):
     image_url = request.args.get('image_url')
 
     return render_template('edit_image.html', image=image, methods_ids=methods_ids, image_url=image_url, image_id=image_id)
+
+
+@app.route('/apply_method/<method_name>/<image_id>', methods=['POST'])
+def apply_method(method_name, image_id):
+    # Carregue a imagem original usando o image_id
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_id + '.jpg')
+    image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+
+    # Obtenha o método de pré-processamento pelo nome do método
+    method = getattr(pp, method_name)
+
+    # Aplique o método de pré-processamento à imagem
+    processed_image = method(image)
+
+    # Salve a imagem processada em algum lugar (por exemplo, Redis ou disco)
+    # Atualize o caminho da imagem no banco de dados, se necessário
+
+    # Construa o caminho completo da imagem processada
+    processed_image_filename = f"{image_id}_processed.jpg"
+    processed_image_path = os.path.join(
+        app.config['UPLOAD_FOLDER'], processed_image_filename)
+
+    # Salve a imagem processada no caminho especificado
+    cv2.imwrite(processed_image_path, processed_image)
+
+    # Retorne o caminho da imagem processada como resposta
+    return jsonify({"processed_image_url": processed_image_path})
 
 
 if __name__ == '__main__':
