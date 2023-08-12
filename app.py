@@ -45,7 +45,25 @@ def index():
 
 @app.route('/save/<image_id>', methods=['POST'])
 def save_image(image_id):
+    image_url = request.form.get('image_url')
+    photo_name = request.form.get('photo_name')
+    photo_date = request.form.get('photo_date')
+    collection_name = request.form.get('collection_name')
+
+    # Crie um hash com as informações da imagem
+    image_data = {
+        'image_url': image_url,
+        'photo_name': photo_name,
+        'photo_date': photo_date,
+        'collection_name': collection_name
+    }
+
+    # Armazene o hash da imagem no Redis
+    redis_client.hmset(image_id, image_data)
+
+    # Adicione o image_id à lista da galeria no Redis
     redis_client.lpush('gallery', image_id)
+
     return redirect(url_for('index'))
 
 

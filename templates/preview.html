@@ -35,10 +35,6 @@
           required
         />
       </div>
-    </fieldset>
-
-    <fieldset class="border p-3">
-      <legend class="w-auto">Informações da Coleção</legend>
       <div class="form-group">
         <label for="collection_name">Nome da Coleção:</label>
         <input
@@ -50,19 +46,19 @@
         />
       </div>
 
-      <button type="submit" class="btn btn-success">Salvar Informações</button>
+      <input type="hidden" name="image_url" value="{{ image_url }}" />
+      <input type="hidden" name="image_id" value="{{ image_id }}" />
+
+      <button type="submit" class="btn btn-success">
+        Salvar Informações e Foto
+      </button>
     </fieldset>
   </form>
 
-  <div class="mt-4">
-    <form method="POST" action="{{ url_for('save_image', image_id=image_id) }}">
-      <button type="submit" class="btn btn-success">Salvar Foto</button>
-    </form>
-    <a
-      href="{{ url_for('delete_image_preview', image_id=image_id) }}"
-      class="btn btn-danger mt-2"
-      >Excluir</a
-    >
-  </div>
+  <a
+    href="{{ url_for('delete_image_preview', image_id=image_id) }}"
+    class="btn btn-danger mt-2"
+    >Excluir</a
+  >
 </div>
 {% endblock %}
