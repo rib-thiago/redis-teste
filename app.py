@@ -95,7 +95,7 @@ def edit_image(image_id):
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_id + '.jpg')
     image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
 
-    # Crie um dicionário para mapear os nomes das funções para seus IDs, como você fez em aplication.py
+    # Crie um dicionário para mapear os nomes das funções para seus IDs
     methods_ids = {}
     methods_functions = {}
     for method_name in dir(pp):
