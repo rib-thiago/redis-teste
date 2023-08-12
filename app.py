@@ -57,20 +57,22 @@ def gallery():
     return render_template('gallery.html', image_urls=image_urls)
 
 
-@app.route('/delete/<image_id>')
+@app.route('/delete/<image_id>', methods=['POST'])
 def delete_image(image_id):
-    # Obtém o caminho completo do arquivo de imagem a partir do image_id
-    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_id + '.jpg')
+    if request.method == 'POST':
+        # Obtém o caminho completo do arquivo de imagem a partir do image_id
+        image_path = os.path.join(
+            app.config['UPLOAD_FOLDER'], image_id + '.jpg')
 
-    # Remove o image_id da lista no Redis
-    redis_client.lrem('gallery', 0, image_id)
+        # Remove o image_id da lista no Redis
+        redis_client.lrem('gallery', 0, image_id)
 
-    # Remove o arquivo de imagem do sistema de arquivos
-    if os.path.exists(image_path):
-        os.remove(image_path)
+        # Remove o arquivo de imagem do sistema de arquivos
+        if os.path.exists(image_path):
+            os.remove(image_path)
 
-    # Redireciona de volta para a página da galeria
-    return redirect(url_for('gallery'))
+        # Redireciona de volta para a página da galeria
+        return redirect(url_for('gallery'))
 
 
 @app.route('/delete_preview/<image_id>')
