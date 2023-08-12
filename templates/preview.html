@@ -9,9 +9,54 @@
       style="max-width: 400px"
     />
   </div>
+
+  <form method="POST" action="{{ url_for('save_image', image_id=image_id) }}">
+    <fieldset class="border p-3">
+      <legend class="w-auto">Informações da Foto</legend>
+      <div class="form-group mt-4">
+        <label for="photo_name">Nome da Foto:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="photo_name"
+          name="photo_name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="photo_date">Data da Foto (YYYY-MM-DD):</label>
+        <input
+          type="text"
+          class="form-control"
+          id="photo_date"
+          name="photo_date"
+          pattern="\d{4}-\d{2}-\d{2}"
+          required
+        />
+      </div>
+    </fieldset>
+
+    <fieldset class="border p-3">
+      <legend class="w-auto">Informações da Coleção</legend>
+      <div class="form-group">
+        <label for="collection_name">Nome da Coleção:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="collection_name"
+          name="collection_name"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-success">Salvar Informações</button>
+    </fieldset>
+  </form>
+
   <div class="mt-4">
     <form method="POST" action="{{ url_for('save_image', image_id=image_id) }}">
-      <button type="submit" class="btn btn-success">Salvar</button>
+      <button type="submit" class="btn btn-success">Salvar Foto</button>
     </form>
     <a
       href="{{ url_for('delete_image_preview', image_id=image_id) }}"
@@ -20,5 +65,4 @@
     >
   </div>
 </div>
-
 {% endblock %}
