@@ -4,6 +4,8 @@ import redis
 from uuid import uuid4
 from io import BytesIO
 from PIL import Image
+import cv2
+import preprocess as pp
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static/images')
@@ -85,6 +87,28 @@ def delete_image_preview(image_id):
 
     # Redireciona de volta para a página inicial
     return redirect(url_for('index'))
+
+
+@app.route('/edit_image/<image_id>', methods=['GET', 'POST'])
+def edit_image(image_id):
+    # Carregue a imagem original usando o image_id
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_id + '.jpg')
+    image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+
+    # Crie um dicionário para mapear os nomes das funções para seus IDs, como você fez em aplication.py
+    methods_ids = {}
+    methods_functions = {}
+    for method_name in dir(pp):
+        method = getattr(pp, method_name)
+        if callable(method):
+            method_id = len(methods_ids) + 1
+            methods_ids[method_name] = method_id
+            methods_functions[method_id] = method_name
+
+    # Recupere a URL da imagem da query string
+    image_url = request.args.get('image_url')
+
+    return render_template('edit_image.html', image=image, methods_ids=methods_ids, image_url=image_url, image_id=image_id)
 
 
 if __name__ == '__main__':

@@ -36,11 +36,13 @@
             <div class="card-body">
               <h5 class="card-title">{{ method_name }}</h5>
               <p class="card-text">Description of the method...</p>
+
               <button
+                onclick="applyMethod('{{ method_name }}')"
                 class="apply-method-button btn btn-dark"
                 data-method-id="{{ method_id }}"
               >
-                Apply
+                Apply {{ method_name }}
               </button>
             </div>
           </div>
