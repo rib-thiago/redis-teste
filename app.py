@@ -70,9 +70,19 @@ def save_image(image_id):
 @app.route('/gallery')
 def gallery():
     image_ids = redis_client.lrange('gallery', 0, -1)
-    image_urls = [url_for('static', filename='images/' +
-                          img_id.decode() + '.jpg') for img_id in image_ids]
-    return render_template('gallery.html', image_urls=image_urls)
+    images_info = []
+
+    for img_id in image_ids:
+        image_data = redis_client.hgetall(img_id)
+        image_info = {
+            'image_url': url_for('static', filename='images/' + img_id.decode() + '.jpg'),
+            'photo_name': image_data.get(b'photo_name', b'').decode(),
+            'photo_date': image_data.get(b'photo_date', b'').decode(),
+            'collection_name': image_data.get(b'collection_name', b'').decode()
+        }
+        images_info.append(image_info)
+
+    return render_template('gallery.html', images_info=images_info)
 
 
 @app.route('/delete/<image_id>', methods=['POST'])
