@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for, flash
 import os
 import redis
 from uuid import uuid4
@@ -8,15 +8,28 @@ import cv2
 import utilities.preprocess as pp
 from config import Config
 from redis_connection import RedisConnection
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.secret_key = 'sua_chave_secreta_aqui'
+
 
 # Cria uma instância da classe RedisConnection para gerenciar a conexão do Redis
 redis_connection = RedisConnection()
 
 # Obtém o cliente Redis do RedisConnection
 redis_client = redis_connection.get_client()
+
+# Função para verificar extensões permitidas
+
+
+def allowed_file(filename):
+    if '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']:
+        return True
+    else:
+        flash("Arquivo não permitido. Por favor, carregue um arquivo com uma extensão válida.", "danger")
+        return False
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -40,8 +53,15 @@ def index():
         as opções de edição disponíveis.
     """
     if request.method == 'POST':
+        if 'image' not in request.files:
+            flash('Nenhum arquivo de imagem enviado.')
+            return redirect(request.url)
         image = request.files['image']
-        if image:
+        if image.filename == '':
+            flash('Nenhum arquivo selecionado para upload.')
+            return redirect(request.url)
+
+        if image and allowed_file(image.filename):
             image_id = str(uuid4())
             image_path = os.path.join(
                 app.config['UPLOAD_FOLDER'], image_id + '.jpg')
@@ -363,4 +383,4 @@ if __name__ == '__main__':
         # Pode ser qualquer valor, não será usado
         redis_client.lpush('gallery', 'initial_value')
 
-    app.run(debug=True)
+    app.run(debug=app.config['DEBUG'])
