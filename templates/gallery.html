@@ -1,6 +1,15 @@
 {% extends "base.html" %} {% block content %}
 <div class="container">
   <h1 class="mt-5">Galeria de Imagens</h1>
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div
+    class="alert {% if category == 'success' %}alert-success{% elif category == 'warning' %}alert-warning{% else %}alert-danger{% endif %}"
+    role="alert"
+  >
+    {{ message }}
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
   <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
     {% for image_info in images_info %}
     <div class="col">

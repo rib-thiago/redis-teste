@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for, flash
 import os
 import redis
 from uuid import uuid4
@@ -8,15 +8,28 @@ import cv2
 import utilities.preprocess as pp
 from config import Config
 from redis_connection import RedisConnection
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.secret_key = 'sua_chave_secreta_aqui'
+
 
 # Cria uma instância da classe RedisConnection para gerenciar a conexão do Redis
 redis_connection = RedisConnection()
 
 # Obtém o cliente Redis do RedisConnection
 redis_client = redis_connection.get_client()
+
+# Função para verificar extensões permitidas
+
+
+def allowed_file(filename):
+    if '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']:
+        return True
+    else:
+        flash("Arquivo não permitido. Por favor, carregue um arquivo com uma extensão válida.", "danger")
+        return False
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -40,8 +53,15 @@ def index():
         as opções de edição disponíveis.
     """
     if request.method == 'POST':
+        if 'image' not in request.files:
+            flash('Nenhum arquivo de imagem enviado.')
+            return redirect(request.url)
         image = request.files['image']
-        if image:
+        if image.filename == '':
+            flash('Nenhum arquivo selecionado para upload.')
+            return redirect(request.url)
+
+        if image and allowed_file(image.filename):
             image_id = str(uuid4())
             image_path = os.path.join(
                 app.config['UPLOAD_FOLDER'], image_id + '.jpg')
@@ -92,6 +112,7 @@ def save_image(image_id):
     redis_client.hmset(image_id, image_data)
     redis_client.lpush('gallery', image_id)
 
+    flash('Foto foi salva com sucesso!', 'success')
     return redirect(url_for('index'))
 
 
@@ -165,6 +186,8 @@ def delete_image(image_id):
         if os.path.exists(image_path):
             os.remove(image_path)
 
+        # Redireciona de volta para a página inicial
+        flash('Foto foi excluída com sucesso!', 'success')
         # Redireciona de volta para a página da galeria
         return redirect(url_for('gallery'))
 
@@ -203,6 +226,7 @@ def delete_image_preview(image_id):
         os.remove(image_path)
 
     # Redireciona de volta para a página inicial
+    flash('Foto foi excluída com sucesso!', 'warning')
     return redirect(url_for('index'))
 
 
@@ -363,4 +387,4 @@ if __name__ == '__main__':
         # Pode ser qualquer valor, não será usado
         redis_client.lpush('gallery', 'initial_value')
 
-    app.run(debug=True)
+    app.run(debug=app.config['DEBUG'])
