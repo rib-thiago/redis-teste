@@ -110,11 +110,6 @@ def save_image(image_id):
         'collection_name': collection_name
     }
 
-    # Cria a chave 'gallery' caso ela não exista
-    if not redis_client.exists('gallery'):
-        # Pode ser qualquer valor, não será usado
-        redis_client.lpush('gallery', 'initial_value')
-
     # Adiciona o ID da imagem à lista da galeria
     redis_client.lpush('gallery', image_id)
 
@@ -122,7 +117,7 @@ def save_image(image_id):
     redis_client.hmset(image_id, image_data)
 
     flash('Foto foi salva com sucesso!', 'success')
-    return redirect(url_for('index'))
+    return redirect(url_for('gallery'))
 
 
 @app.route('/gallery')

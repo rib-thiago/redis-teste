@@ -10,14 +10,18 @@
     />
   </div>
 
-  <form method="POST" action="{{ url_for('save_image', image_id=image_id) }}">
+  <form
+    method="POST"
+    action="{{ url_for('save_image', image_id=image_id) }}"
+    autocomplete="off"
+  >
     <fieldset class="border p-3">
       <legend class="w-auto">Informações da Foto</legend>
       <div class="form-group mt-4">
         <label for="photo_name">Nome da Foto:</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control mt-2 mb-2"
           id="photo_name"
           name="photo_name"
           required
@@ -27,11 +31,10 @@
       <div class="form-group">
         <label for="photo_date">Data da Foto (YYYY-MM-DD):</label>
         <input
-          type="text"
-          class="form-control"
+          type="date"
+          class="form-control mb-2 mt-2"
           id="photo_date"
           name="photo_date"
-          pattern="\d{4}-\d{2}-\d{2}"
           required
         />
       </div>
@@ -39,7 +42,7 @@
         <label for="collection_name">Nome da Coleção:</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control mb-2 mt-2"
           id="collection_name"
           name="collection_name"
           required
@@ -49,16 +52,19 @@
       <input type="hidden" name="image_url" value="{{ image_url }}" />
       <input type="hidden" name="image_id" value="{{ image_id }}" />
 
-      <button type="submit" class="btn btn-success">
-        Salvar Informações e Foto
-      </button>
+      <div class="d-flex mt-3">
+        <button type="submit" class="btn btn-success me-2">
+          Salvar Informações e Foto
+        </button>
+
+        <a
+          href="{{ url_for('delete_image_preview', image_id=image_id) }}"
+          class="btn btn-danger"
+        >
+          Excluir
+        </a>
+      </div>
     </fieldset>
   </form>
-
-  <a
-    href="{{ url_for('delete_image_preview', image_id=image_id) }}"
-    class="btn btn-danger mt-2"
-    >Excluir</a
-  >
 </div>
 {% endblock %}
