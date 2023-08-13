@@ -112,6 +112,7 @@ def save_image(image_id):
     redis_client.hmset(image_id, image_data)
     redis_client.lpush('gallery', image_id)
 
+    flash('Foto foi salva com sucesso!', 'success')
     return redirect(url_for('index'))
 
 
@@ -185,6 +186,8 @@ def delete_image(image_id):
         if os.path.exists(image_path):
             os.remove(image_path)
 
+        # Redireciona de volta para a página inicial
+        flash('Foto foi excluída com sucesso!', 'success')
         # Redireciona de volta para a página da galeria
         return redirect(url_for('gallery'))
 
@@ -223,6 +226,7 @@ def delete_image_preview(image_id):
         os.remove(image_path)
 
     # Redireciona de volta para a página inicial
+    flash('Foto foi excluída com sucesso!', 'warning')
     return redirect(url_for('index'))
 
 
