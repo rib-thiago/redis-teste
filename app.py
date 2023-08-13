@@ -6,22 +6,17 @@ from io import BytesIO
 from PIL import Image
 import cv2
 import utilities.preprocess as pp
+from config import Config
+from redis_connection import RedisConnection
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static/images')
+app.config.from_object(Config)
 
+# Cria uma instância da classe RedisConnection para gerenciar a conexão do Redis
+redis_connection = RedisConnection()
 
-# Conexão com o banco de dados Redis
-# Configuração da conexão ao Redis
-redis_host = 'localhost'
-redis_port = 6379
-redis_password = 'qwert'  # Substitua pela senha do seu Redis
-redis_db = 0
-
-
-# Conexão com o banco de dados Redis
-redis_client = redis.StrictRedis(
-    host=redis_host, port=redis_port, password=redis_password, db=redis_db)
+# Obtém o cliente Redis do RedisConnection
+redis_client = redis_connection.get_client()
 
 
 @app.route('/', methods=['GET', 'POST'])
