@@ -21,6 +21,7 @@ redis_connection = RedisConnection()
 # Obtém o cliente Redis do RedisConnection
 redis_client = redis_connection.get_client()
 
+
 # Função para verificar extensões permitidas
 
 
@@ -109,8 +110,16 @@ def save_image(image_id):
         'collection_name': collection_name
     }
 
-    redis_client.hmset(image_id, image_data)
+    # Cria a chave 'gallery' caso ela não exista
+    if not redis_client.exists('gallery'):
+        # Pode ser qualquer valor, não será usado
+        redis_client.lpush('gallery', 'initial_value')
+
+    # Adiciona o ID da imagem à lista da galeria
     redis_client.lpush('gallery', image_id)
+
+    # Salva as informações da imagem no Redis
+    redis_client.hmset(image_id, image_data)
 
     flash('Foto foi salva com sucesso!', 'success')
     return redirect(url_for('index'))
@@ -147,6 +156,9 @@ def gallery():
             'collection_name': image_data.get(b'collection_name', b'').decode()
         }
         images_info.append(image_info)
+
+    if not images_info:
+        flash("A galeria está vazia.", "warning")
 
     return render_template('gallery.html', images_info=images_info)
 
@@ -382,9 +394,4 @@ def update_image(image_id):
 
 
 if __name__ == '__main__':
-    # Verifica se a chave 'gallery' existe no Redis, cria se não existir
-    if not redis_client.exists('gallery'):
-        # Pode ser qualquer valor, não será usado
-        redis_client.lpush('gallery', 'initial_value')
-
     app.run(debug=app.config['DEBUG'])
