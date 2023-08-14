@@ -4,7 +4,7 @@ import os
 class Config:
     UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static/images')
     DEBUG = True  # Ativar o modo de depuração
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
 
 class RedisConfig:

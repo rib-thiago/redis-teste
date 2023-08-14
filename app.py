@@ -110,11 +110,9 @@ def save_image(image_id):
         'collection_name': collection_name
     }
 
-    # Adiciona o ID da imagem à lista da galeria
-    redis_client.lpush('gallery', image_id)
-
-    # Salva as informações da imagem no Redis
-    redis_client.hmset(image_id, image_data)
+    # Usando os métodos da classe RedisConnection
+    redis_connection.add_image_to_gallery(image_id)
+    redis_connection.save_image_info(image_id, image_data)
 
     flash('Foto foi salva com sucesso!', 'success')
     return redirect(url_for('gallery'))
@@ -122,35 +120,8 @@ def save_image(image_id):
 
 @app.route('/gallery')
 def gallery():
-    """
-    Exibe a galeria de imagens armazenadas no banco de dados.
-
-    Esta rota exibe a página da galeria, que contém informações sobre as imagens previamente
-    salvas no banco de dados (Redis). As informações exibidas incluem a URL da imagem, o nome da foto,
-    a data da foto e o nome da coleção. Essas informações são recuperadas do banco de dados e formatadas
-    para exibição na página da galeria.
-
-    Returns:
-        render_template: A página HTML renderizada com as informações das imagens na galeria.
-
-    Note:
-        Certifique-se de que o objeto Flask 'app' esteja configurado corretamente e que as bibliotecas
-        necessárias estejam importadas.
-        As informações recuperadas do banco de dados são exibidas na página da galeria para que os usuários
-        possam visualizar e navegar pelas imagens previamente salvas.
-    """
-    image_ids = redis_client.lrange('gallery', 0, -1)
-    images_info = []
-
-    for img_id in image_ids:
-        image_data = redis_client.hgetall(img_id)
-        image_info = {
-            'image_url': url_for('static', filename='images/' + img_id.decode() + '.jpg'),
-            'photo_name': image_data.get(b'photo_name', b'').decode(),
-            'photo_date': image_data.get(b'photo_date', b'').decode(),
-            'collection_name': image_data.get(b'collection_name', b'').decode()
-        }
-        images_info.append(image_info)
+    # Usando o método da classe RedisConnection
+    images_info = redis_connection.get_gallery_images_info()
 
     if not images_info:
         flash("A galeria está vazia.", "warning")
@@ -186,8 +157,8 @@ def delete_image(image_id):
         image_path = os.path.join(
             app.config['UPLOAD_FOLDER'], image_id + '.jpg')
 
-        # Remove o image_id da lista no Redis
-        redis_client.lrem('gallery', 0, image_id)
+        # Usando o método da classe RedisConnection para deletar a imagem
+        redis_connection.delete_image(image_id)
 
         # Remove o arquivo de imagem do sistema de arquivos
         if os.path.exists(image_path):
