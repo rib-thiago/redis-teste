@@ -1,6 +1,6 @@
 ## Diagrama
 
-![Diagrama Casos de Uso](caso-de-uso.png)
+![Diagrama Casos de Uso](../case11.png)
 
 ### **Caso de Uso: Realizar Upload de Arquivo**
 
@@ -318,3 +318,35 @@
       - **Requisitos:**
         - Implementação da funcionalidade de aplicação de edições em lote.
         - Integração com o caso de uso de seleção de documentos.
+
+---
+
+## Código PlantUML
+
+```
+@startuml
+left to right direction
+
+actor Usuario as U
+rectangle ImageDoc {
+  usecase "Realizar Upload de Arquivo" as Upload
+  usecase "Criar Coleção" as CriarColecao
+  usecase "Visualizar Documento" as Visualizar
+  usecase "Editar Documento" as Editar
+  usecase "Definir Acesso" as DefinirAcesso
+  usecase "Revogar Acesso" as RevogarAcesso
+  usecase "Selecionar Texto" as SelecionarTexto
+  usecase "Realizar Tradução" as RealizarTraducao
+
+}
+
+U --> Upload
+U --> CriarColecao
+U --> Visualizar
+U --> Editar
+U --> DefinirAcesso
+U --> RevogarAcesso
+U --> SelecionarTexto
+U --> RealizarTraducao
+@enduml
+```
