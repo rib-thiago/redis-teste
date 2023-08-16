@@ -30,6 +30,8 @@ Usuario --> Criar
 @enduml
 ```
 
+![](case02.png)
+
 ## 3. Diagrama de Classes
 
 ### 3.1. Sintaxe Básica de Diagrama de Classes
@@ -44,6 +46,8 @@ class NomeDaClasse {
 }
 @enduml
 ```
+
+![](case03.png)
 
 ### 3.2. Exemplo de Diagrama de Classes
 
@@ -63,6 +67,8 @@ Usuario -- Arquivo
 @enduml
 ```
 
+![](case04.png)
+
 ## 4. Diagrama de Sequência
 
 ### 4.1. Sintaxe Básica de Diagrama de Sequência
@@ -74,6 +80,8 @@ participant Participante
 Ator -> Participante: Ação
 @enduml
 ```
+
+![](case05.png)
 
 ### 4.2. Exemplo de Diagrama de Sequência
 
@@ -94,6 +102,8 @@ ServicoArmazenamento -> Sistema: Registra metadados do arquivo
 @enduml
 ```
 
+![](case06.png)
+
 ## 5. Diagrama de Atividades
 
 ### 5.1. Sintaxe Básica de Diagrama de Atividades
@@ -111,6 +121,8 @@ endif
 end
 @enduml
 ```
+
+![](case07.png)
 
 ### 5.2. Exemplo de Diagrama de Atividades
 
@@ -133,6 +145,8 @@ stop
 @enduml
 ```
 
+![](case08.png)
+
 ## 6. Diagrama Entidade-Relacionamento (DER)
 
 ### 6.1. Sintaxe Básica de Diagrama Entidade-Relacionamento
@@ -151,6 +165,8 @@ Entidade1 --|> Entidade2
 @enduml
 ```
 
+![](case09.png)
+
 ### 6.2. Exemplo de Diagrama Entidade-Relacionamento
 
 ```
@@ -167,7 +183,7 @@ Usuario -- Arquivo
 @enduml
 ```
 
----
+## ![](case10.png)
 
 Esse tutorial cobriu os diagramas UML mais comuns. Lembre-se de que o PlantUML oferece uma grande flexibilidade para personalização e detalhamento. À medida que você se familiariza com a sintaxe, você pode adicionar mais detalhes e personalizar ainda mais seus diagramas.
 
