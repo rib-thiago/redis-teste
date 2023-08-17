@@ -31,7 +31,29 @@
   - Validação de formato e tamanho do arquivo.
   - Registro correto dos metadados do arquivo no MongoDB.
 
+```
+@startuml
+|Início|
+start
+:Usuário acessa página de upload;
+:Exibir interface de upload;
+:Usuário seleciona arquivo;
+|Validar Arquivo|
+if (Arquivo válido?) then (Sim)
+  :Enviar arquivo para armazenamento;
+else (Não)
+  :Exibir mensagem de erro;
+endif
+|Armazenar Arquivo|
+:Armazenar arquivo;
+:Registrar metadados do arquivo;
+|Upload Concluído|
+stop
+@enduml
+```
+
 ![sequencia upload](../sequencia-upload.png)
+![atividade upload](../atividade-upload.png)
 
 ---
 
@@ -195,6 +217,8 @@
   - Lista de usuários cadastrados na coleção com permissões definidas.
   - Implementação das opções de permissões.
   - Registros das revogações de permissões.
+
+![](../case12.png)
 
 ---
 

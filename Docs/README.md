@@ -403,4 +403,114 @@ InterfaceUsuario -> Sistema: Registra permissões definidas
 
 ---
 
+## Diagrama de Sequencia: Revogar Acesso
+
+```
+@startuml
+actor User
+participant AccessManagementUI
+participant System
+
+User -> AccessManagementUI: Access Management Page
+AccessManagementUI -> AccessManagementUI: Display user list
+User -> AccessManagementUI: Select users
+AccessManagementUI -> AccessManagementUI: Display permission options
+User -> AccessManagementUI: Choose permissions
+AccessManagementUI -> System: Register defined permissions
+@enduml
+```
+
+![](case12.png)
+
+---
+
+## Diagrama de Sequencia: Selecionar Texto
+
+```
+@startuml
+actor User
+participant DocumentAccess
+participant System
+
+User -> DocumentAccess: Access Document
+User -> DocumentAccess: Select text
+DocumentAccess -> System: Highlight text
+@enduml
+
+```
+
+![](case13.png)
+
+---
+
+## Diagrama de Sequência: Realizar Tradução
+
+```
+@startuml
+actor User
+participant DocumentAccess
+participant TranslationService
+participant System
+
+User -> DocumentAccess: Access Document
+User -> DocumentAccess: Select text
+User -> DocumentAccess: Choose translation
+DocumentAccess -> TranslationService: Translate text
+TranslationService -> System: Return translated text
+@enduml
+```
+
+![](case14.png)
+
+---
+
+## Diagrama de Sequência: Selecionar Documentos
+
+```
+@startuml
+actor User
+participant BatchEditSelection
+participant System
+
+User -> BatchEditSelection: Batch Edit Selection Page
+User -> BatchEditSelection: Choose documents
+@enduml
+
+```
+
+---
+
+## Diagrama de Sequência: Escolher Edições em Lote
+
+```
+@startuml
+actor User
+participant BatchEditSelection
+participant System
+
+User -> BatchEditSelection: Batch Edit Selection Page
+User -> BatchEditSelection: Choose edits
+@enduml
+
+```
+
+---
+
+## Diagrama de Sequência: Aplicar Edições
+
+```
+@startuml
+actor User
+participant ApplyEdits
+participant System
+
+User -> ApplyEdits: Apply Edits Page
+User -> ApplyEdits: Confirm edit application
+ApplyEdits -> System: Apply selected edits to documents
+@enduml
+
+```
+
+---
+
 Estes são exemplos simples de diagramas de sequência para alguns dos casos de uso que você forneceu. Eles representam interações entre atores, interfaces do usuário, serviços e o sistema. Lembre-se de que você pode ajustar os diagramas para refletir com mais precisão as ações e interações específicas do seu sistema.
