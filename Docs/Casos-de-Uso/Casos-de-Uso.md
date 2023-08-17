@@ -31,6 +31,8 @@
   - Validação de formato e tamanho do arquivo.
   - Registro correto dos metadados do arquivo no MongoDB.
 
+![sequencia upload](../sequencia-upload.png)
+
 ---
 
 ### **Caso de Uso: Criar Coleção**
@@ -62,6 +64,8 @@
   - Arquivos previamente carregados na aplicação.
   - Funcionalidade de armazenamento e associação de arquivos implementada.
   - Correta criação e associação da coleção no MongoDB.
+
+![sequencia coleção](../sequencia-coleacao.png)
 
 ---
 
@@ -96,6 +100,8 @@
   - Implementação da funcionalidade de visualização de documentos.
   - Integração com os casos de uso de edição e tradução, caso o usuário escolha estendê-los.
 
+![sequencia visualizar](../sequencia-visualizar.png)
+
 ---
 
 ### **Caso de Uso: Editar Documento**
@@ -128,6 +134,8 @@
   - Implementação da funcionalidade de edição de documentos.
   - Integração com o caso de uso de aplicação de edições.
 
+![sequencia editar](../sequencia-editar.png)
+
 ---
 
 ### **Caso de Uso: Definir Acesso**
@@ -158,7 +166,7 @@
   - Implementação das opções de permissões.
   - Registros das permissões definidas.
 
----
+## ![sequencia acesso](../sequencia-acesso.png)
 
 ### **Caso de Uso: Revogar Acesso**
 
