@@ -1,6 +1,6 @@
 ## Diagrama
 
-![Diagrama Casos de Uso](../case11.png)
+![Diagrama Casos de Uso](../media/caso-de-uso-image-doc.png)
 
 ### **Caso de Uso: Realizar Upload de Arquivo**
 
@@ -52,8 +52,13 @@ stop
 @enduml
 ```
 
-![sequencia upload](../sequencia-upload.png)
-![atividade upload](../atividade-upload.png)
+- **Diagrama de Sequencia**:
+
+![sequencia upload](../media/sequencia-upload.png)
+
+- **Diagrama de Atividades**:
+
+![atividade upload](../media/atividade-upload.png)
 
 ---
 
@@ -82,12 +87,15 @@ stop
   - Se o usuário não estiver autenticado, o sistema exibirá uma mensagem solicitando o login antes de permitir a criação da coleção.
   - Se não houver arquivos carregados na aplicação, o sistema informará ao usuário que não é possível criar uma coleção sem um arquivo associado.
 - **Requisitos:**
+
   - Acesso à interface de criação de coleções.
   - Arquivos previamente carregados na aplicação.
   - Funcionalidade de armazenamento e associação de arquivos implementada.
   - Correta criação e associação da coleção no MongoDB.
 
-![sequencia coleção](../sequencia-coleacao.png)
+- **Diagrama de Sequencia:**
+
+![sequencia coleção](../media/sequencia-coleacao.png)
 
 ---
 
@@ -117,12 +125,15 @@ stop
   - Se o usuário não estiver autenticado, o sistema exibirá uma mensagem solicitando o login antes de permitir a visualização do documento.
   - Se não houver documentos disponíveis para visualização, o sistema informará ao usuário que não é possível realizar a visualização.
 - **Requisitos:**
+
   - Acesso à interface de visualização de documentos.
   - Documentos disponíveis para visualização.
   - Implementação da funcionalidade de visualização de documentos.
   - Integração com os casos de uso de edição e tradução, caso o usuário escolha estendê-los.
 
-![sequencia visualizar](../sequencia-visualizar.png)
+- **Diagrama de Sequencia**:
+
+![sequencia visualizar](../media/sequencia-visualizar.png)
 
 ---
 
@@ -151,12 +162,15 @@ stop
   - Se o usuário não estiver autenticado, o sistema exibirá uma mensagem solicitando o login antes de permitir a edição do documento.
   - Se não houver documentos disponíveis para edição, o sistema informará ao usuário que não é possível realizar a edição.
 - **Requisitos:**
+
   - Acesso à interface de edição de documentos.
   - Documentos disponíveis para edição.
   - Implementação da funcionalidade de edição de documentos.
   - Integração com o caso de uso de aplicação de edições.
 
-![sequencia editar](../sequencia-editar.png)
+- **Diagrama de Sequencia**:
+
+![sequencia editar](../media/sequencia-editar.png)
 
 ---
 
@@ -183,12 +197,15 @@ stop
   - Se o usuário não tiver permissões de gerenciamento para a coleção, o sistema informará que ele não tem autorização para realizar essa ação.
   - Se não houver usuários cadastrados no sistema, o sistema informará que não é possível definir acesso.
 - **Requisitos:**
+
   - Funcionalidade de gerenciamento de acesso à coleção.
   - Lista de usuários cadastrados.
   - Implementação das opções de permissões.
   - Registros das permissões definidas.
 
-## ![sequencia acesso](../sequencia-acesso.png)
+- **Diagrama de Sequencia**:
+
+## ![sequencia acesso](../media/sequencia-acesso.png)
 
 ### **Caso de Uso: Revogar Acesso**
 
@@ -213,12 +230,15 @@ stop
   - Se o usuário não tiver permissões de gerenciamento para a coleção, o sistema informará que ele não tem autorização para realizar essa ação.
   - Se não houver usuários com permissões definidas na coleção, o sistema informará que não é possível revogar acesso.
 - **Requisitos:**
+
   - Funcionalidade de gerenciamento de acesso à coleção.
   - Lista de usuários cadastrados na coleção com permissões definidas.
   - Implementação das opções de permissões.
   - Registros das revogações de permissões.
 
-![](../case12.png)
+- **Diagrama de Sequencia**:
+
+![](../media/sequencia-revogar.png)
 
 ---
 
@@ -243,8 +263,13 @@ stop
   - Se o usuário não estiver autenticado, o sistema solicitará o login antes de permitir a seleção de texto.
   - Se o usuário não tiver acesso ao documento ou se o documento não estiver disponível para visualização, o sistema informará que a seleção de texto não é possível.
 - **Requisitos:**
+
   - Implementação da funcionalidade de seleção de texto.
   - Destaque visual para o trecho selecionado.
+
+- **Diagrama de Sequencia**:
+
+![](../media/sequencia-selecionar.png)
 
 ---
 
@@ -273,112 +298,109 @@ stop
   - Se o usuário não tiver acesso ao documento ou se o documento não estiver disponível para visualização, o sistema informará que a tradução não é possível.
   - Se o usuário não tiver selecionado um trecho de texto para tradução, o sistema informará que a tradução não pode ser realizada.
 - **Requisitos:**
+
   - Implementação da funcionalidade de tradução de texto.
   - Opção de aplicar edições no trecho traduzido.
-  ***
-  ### **Caso de Uso: Selecionar Documentos**
-  - **Caso de Uso Principal:** Selecionar documentos para aplicar edições em lote.
-  - **Resumo:** Este caso de uso descreve como o usuário seleciona um ou mais documentos em uma coleção para aplicar edições em lote. Ele estende o caso de uso "Escolher Edições em Lote" para evitar duplicação de lógica.
-  - **Pré-condições:**
-    - O usuário deve estar autenticado no sistema.
-    - O usuário deve ter acesso à funcionalidade de seleção de documentos para edições em lote.
-    - O usuário deve estar na página de seleção de documentos.
-  - **Pós-condições:**
-    - Os documentos selecionados estão prontos para receber as edições em lote.
-  - **Fluxo Principal:**
-    1. O usuário acessa a página de seleção de documentos para edições em lote.
-    2. O sistema exibe a interface de seleção de documentos.
-    3. O usuário seleciona um ou mais documentos que deseja incluir no processo de edições em lote.
-  - **Estende:** Escolher Edições em Lote (Parte do fluxo de seleção de documentos)
-    1. O usuário escolhe os documentos que deseja incluir no processo de edições em lote.
-    2. O sistema estende o caso de uso de escolha de edições em lote.
-  - **Exceções:**
-    - Se o usuário não estiver autenticado, o sistema solicitará o login antes de permitir a seleção de documentos para edições em lote.
-    - Se o usuário não tiver acesso à funcionalidade de seleção de documentos, o sistema informará que a ação não é permitida.
-    - Se não houver documentos disponíveis para seleção, o sistema informará que não é possível realizar a seleção.
-  - **Requisitos:**
-    - Implementação da funcionalidade de seleção de documentos para edições em lote.
-    - Integração com o caso de uso de escolher edições em lote.
-    ***
-    ### **Caso de Uso: Escolher Edições em Lote**
-    - **Caso de Uso Principal:** Escolher as edições a serem aplicadas em vários documentos selecionados.
-    - **Resumo:** Este caso de uso descreve como o usuário escolhe quais edições deseja aplicar em um conjunto de documentos selecionados. Ele faz parte do processo de aplicação de edições em lote.
-    - **Pré-condições:**
-      - O usuário deve estar autenticado no sistema.
-      - O usuário deve ter selecionado um ou mais documentos para edições em lote.
-      - O usuário deve estar na página de escolha de edições em lote.
-    - **Pós-condições:**
-      - As edições selecionadas estão prontas para serem aplicadas nos documentos selecionados.
-    - **Fluxo Principal:**
-      1. O usuário acessa a página de escolha de edições em lote.
-      2. O sistema exibe a interface de escolha de edições em lote.
-      3. O usuário seleciona as edições que deseja aplicar nos documentos selecionados.
-    - **Inclui:** Selecionar Documentos (Parte do fluxo de escolha de edições em lote)
-      1. O usuário escolhe os documentos nos quais deseja aplicar edições em lote.
-      2. O sistema inclui o caso de uso de seleção de documentos.
-    - **Exceções:**
-      - Se o usuário não estiver autenticado, o sistema solicitará o login antes de permitir a escolha de edições em lote.
-      - Se o usuário não tiver selecionado nenhum documento, o sistema informará que é necessário selecionar documentos antes de escolher as edições.
-      - Se não houver edições disponíveis para escolha, o sistema informará que não é possível realizar a escolha.
-    - **Requisitos:**
-      - Implementação da funcionalidade de escolha de edições em lote.
-      - Integração com o caso de uso de seleção de documentos.
-      ***
-      ### **Caso de Uso: Aplicar Edições**
-      - **Caso de Uso Principal:** Aplicar as edições escolhidas em todos os documentos selecionados.
-      - **Resumo:** Este caso de uso descreve como o usuário aplica as edições escolhidas em um conjunto de documentos previamente selecionados. Ele faz parte do processo de edição em lote.
-      - **Pré-condições:**
-        - O usuário deve estar autenticado no sistema.
-        - O usuário deve ter selecionado um ou mais documentos nos quais deseja aplicar edições.
-        - O usuário deve ter escolhido as edições a serem aplicadas nos documentos selecionados.
-        - O usuário deve estar na página de aplicação de edições.
-      - **Pós-condições:**
-        - As edições selecionadas são aplicadas a todos os documentos escolhidos.
-      - **Fluxo Principal:**
-        1. O usuário acessa a página de aplicação de edições.
-        2. O sistema exibe a interface de aplicação de edições.
-        3. O sistema exibe a lista de documentos selecionados e as edições escolhidas pelo usuário.
-        4. O usuário confirma a aplicação das edições nos documentos.
-        5. O sistema aplica as edições em cada documento selecionado.
-      - **Inclui:** Selecionar Documentos (Parte do fluxo de aplicação de edições)
-        1. O usuário escolhe os documentos nos quais deseja aplicar as edições.
-        2. O sistema inclui o caso de uso de seleção de documentos.
-      - **Exceções:**
-        - Se o usuário não estiver autenticado, o sistema solicitará o login antes de permitir a aplicação de edições.
-        - Se o usuário não tiver selecionado nenhum documento, o sistema informará que é necessário selecionar documentos antes de aplicar as edições.
-        - Se não houver edições escolhidas, o sistema informará que é necessário escolher as edições antes de aplicá-las.
-      - **Requisitos:**
-        - Implementação da funcionalidade de aplicação de edições em lote.
-        - Integração com o caso de uso de seleção de documentos.
+
+- **Diagrama de Sequencia**:
+
+![](../media/sequencia-traduzir.png)
 
 ---
 
-## Código PlantUML
+### **Caso de Uso: Selecionar Documentos**
 
-```
-@startuml
-left to right direction
+- **Caso de Uso Principal:** Selecionar documentos para aplicar edições em lote.
+- **Resumo:** Este caso de uso descreve como o usuário seleciona um ou mais documentos em uma coleção para aplicar edições em lote. Ele estende o caso de uso "Escolher Edições em Lote" para evitar duplicação de lógica.
+- **Pré-condições:**
+  - O usuário deve estar autenticado no sistema.
+  - O usuário deve ter acesso à funcionalidade de seleção de documentos para edições em lote.
+  - O usuário deve estar na página de seleção de documentos.
+- **Pós-condições:**
+  - Os documentos selecionados estão prontos para receber as edições em lote.
+- **Fluxo Principal:**
+  1. O usuário acessa a página de seleção de documentos para edições em lote.
+  2. O sistema exibe a interface de seleção de documentos.
+  3. O usuário seleciona um ou mais documentos que deseja incluir no processo de edições em lote.
+- **Estende:** Escolher Edições em Lote (Parte do fluxo de seleção de documentos)
+  1. O usuário escolhe os documentos que deseja incluir no processo de edições em lote.
+  2. O sistema estende o caso de uso de escolha de edições em lote.
+- **Exceções:**
+  - Se o usuário não estiver autenticado, o sistema solicitará o login antes de permitir a seleção de documentos para edições em lote.
+  - Se o usuário não tiver acesso à funcionalidade de seleção de documentos, o sistema informará que a ação não é permitida.
+  - Se não houver documentos disponíveis para seleção, o sistema informará que não é possível realizar a seleção.
+- **Requisitos:**
 
-actor Usuario as U
-rectangle ImageDoc {
-  usecase "Realizar Upload de Arquivo" as Upload
-  usecase "Criar Coleção" as CriarColecao
-  usecase "Visualizar Documento" as Visualizar
-  usecase "Editar Documento" as Editar
-  usecase "Definir Acesso" as DefinirAcesso
-  usecase "Revogar Acesso" as RevogarAcesso
-  usecase "Selecionar Texto" as SelecionarTexto
-  usecase "Realizar Tradução" as RealizarTraducao
+  - Implementação da funcionalidade de seleção de documentos para edições em lote.
+  - Integração com o caso de uso de escolher edições em lote.
 
-}
+- **Diagrama de Sequencia**:
 
-U --> Upload
-U --> CriarColecao
-U --> Visualizar
-U --> Editar
-U --> DefinirAcesso
-U --> RevogarAcesso
-U --> SelecionarTexto
-U --> RealizarTraducao
-@enduml
-```
+![](../media/sequencia-selecionar.png)
+
+---
+
+### **Caso de Uso: Escolher Edições em Lote**
+
+- **Caso de Uso Principal:** Escolher as edições a serem aplicadas em vários documentos selecionados.
+- **Resumo:** Este caso de uso descreve como o usuário escolhe quais edições deseja aplicar em um conjunto de documentos selecionados. Ele faz parte do processo de aplicação de edições em lote.
+- **Pré-condições:**
+  - O usuário deve estar autenticado no sistema.
+  - O usuário deve ter selecionado um ou mais documentos para edições em lote.
+  - O usuário deve estar na página de escolha de edições em lote.
+- **Pós-condições:**
+  - As edições selecionadas estão prontas para serem aplicadas nos documentos selecionados.
+- **Fluxo Principal:**
+  1. O usuário acessa a página de escolha de edições em lote.
+  2. O sistema exibe a interface de escolha de edições em lote.
+  3. O usuário seleciona as edições que deseja aplicar nos documentos selecionados.
+- **Inclui:** Selecionar Documentos (Parte do fluxo de escolha de edições em lote)
+  1. O usuário escolhe os documentos nos quais deseja aplicar edições em lote.
+  2. O sistema inclui o caso de uso de seleção de documentos.
+- **Exceções:**
+  - Se o usuário não estiver autenticado, o sistema solicitará o login antes de permitir a escolha de edições em lote.
+  - Se o usuário não tiver selecionado nenhum documento, o sistema informará que é necessário selecionar documentos antes de escolher as edições.
+  - Se não houver edições disponíveis para escolha, o sistema informará que não é possível realizar a escolha.
+- **Requisitos:**
+
+  - Implementação da funcionalidade de escolha de edições em lote.
+  - Integração com o caso de uso de seleção de documentos.
+
+- **Diagrama de Sequencia**:
+
+![](../media/sequencia-lote.png)
+
+---
+
+### **Caso de Uso: Aplicar Edições**
+
+- **Caso de Uso Principal:** Aplicar as edições escolhidas em todos os documentos selecionados.
+- **Resumo:** Este caso de uso descreve como o usuário aplica as edições escolhidas em um conjunto de documentos previamente selecionados. Ele faz parte do processo de edição em lote.
+- **Pré-condições:**
+  - O usuário deve estar autenticado no sistema.
+  - O usuário deve ter selecionado um ou mais documentos nos quais deseja aplicar edições.
+  - O usuário deve ter escolhido as edições a serem aplicadas nos documentos selecionados.
+  - O usuário deve estar na página de aplicação de edições.
+- **Pós-condições:**
+  - As edições selecionadas são aplicadas a todos os documentos escolhidos.
+- **Fluxo Principal:**
+  1. O usuário acessa a página de aplicação de edições.
+  2. O sistema exibe a interface de aplicação de edições.
+  3. O sistema exibe a lista de documentos selecionados e as edições escolhidas pelo usuário.
+  4. O usuário confirma a aplicação das edições nos documentos.
+  5. O sistema aplica as edições em cada documento selecionado.
+- **Inclui:** Selecionar Documentos (Parte do fluxo de aplicação de edições)
+  1. O usuário escolhe os documentos nos quais deseja aplicar as edições.
+  2. O sistema inclui o caso de uso de seleção de documentos.
+- **Exceções:**
+  - Se o usuário não estiver autenticado, o sistema solicitará o login antes de permitir a aplicação de edições.
+  - Se o usuário não tiver selecionado nenhum documento, o sistema informará que é necessário selecionar documentos antes de aplicar as edições.
+  - Se não houver edições escolhidas, o sistema informará que é necessário escolher as edições antes de aplicá-las.
+- **Requisitos:**
+
+  - Implementação da funcionalidade de aplicação de edições em lote.
+  - Integração com o caso de uso de seleção de documentos
+
+- **Diagrama de Sequencia**:
+
+![](../media/sequencia-aplicar.png)

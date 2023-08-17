@@ -68,7 +68,7 @@ Controller --> View : Atualiza
 
 ```
 
-![Diagrama MVC](diagrama-mvc.png)
+![Diagrama MVC](media/diagrama-mvc.png)
 
 Isso completa a explicação do padrão MVC. Agora vou prosseguir com a explicação do padrão de design Proxy.
 
@@ -103,7 +103,7 @@ Proxy --> RealSubject
 
 ```
 
-![proxy](proxy.png)
+![proxy](media/proxy.png)
 
 ## Padrão de Design Observer:
 
@@ -143,7 +143,7 @@ ConcreteObserver --> ConcreteSubject
 
 ```
 
-![observer](observer.png)
+![observer](media/observer.png)
 
 ## Padrão de Design Template Method:
 
@@ -176,7 +176,7 @@ AbstractClass <|-- ConcreteClassB
 
 ```
 
-![template method](template-method.png)
+![template method](media/template-method.png)
 
 ## Padrão de Design Strategy:
 
@@ -211,7 +211,7 @@ Context --> ConcreteStrategyB
 
 ```
 
-![strategy](strategy.png)
+![strategy](media/strategy.png)
 
 Esses são os padrões Proxy, Observer, Template Method e Strategy, juntamente com seus diagramas UML correspondentes. Eles oferecem abordagens eficazes para resolver diferentes tipos de problemas de design em sistemas de software. Se você quiser saber mais detalhes sobre a implementação de algum desses padrões ou tiver mais perguntas, sinta-se à vontade para perguntar!
 
@@ -286,7 +286,7 @@ InterfaceUsuario --> ServicoArmazenamento
 
 ```
 
-![Diagrama-classes](classes.png)
+![Diagrama-classes](media/classes.png)
 
 Este é um diagrama de classes simplificado que representa a estrutura básica do seu sistema. Ele inclui classes como Usuario, Documento, Colecao, ServicoArmazenamento, ServicoTraducao e InterfaceUsuario. Lembre-se de que você deve ajustar esse diagrama de acordo com os requisitos específicos do seu sistema e também considerar a implementação dos padrões de design discutidos anteriormente (Proxy, Observer, Template Method e Strategy).
 
@@ -316,7 +316,7 @@ ServicoArmazenamento -> Sistema: Registra metadados do arquivo
 
 ```
 
-![sequenica upload](sequencia-upload.png)
+![sequenica upload](media/sequencia-upload.png)
 
 ### Diagrama de Sequência: Criar Coleção
 
@@ -336,7 +336,7 @@ InterfaceUsuario -> Sistema: Cria coleção e associa arquivo
 
 ```
 
-![sequencia coleção](sequencia-coleacao.png)
+![sequencia coleção](media/sequencia-coleacao.png)
 
 ### Diagrama de Sequência: Visualizar Documento
 
@@ -356,7 +356,7 @@ InterfaceUsuario -> InterfaceUsuario: Exibe conteúdo do documento
 @enduml
 ```
 
-![sequencia visualizar](sequencia-visualizar.png)
+![sequencia visualizar](media/sequencia-visualizar.png)
 
 ## Diagrama de Sequência: Editar Documento
 
@@ -379,7 +379,7 @@ InterfaceUsuario -> InterfaceUsuario: Registra edições
 
 ```
 
-![sequencia editar](sequencia-editar.png)
+![sequencia editar](media/sequencia-editar.png)
 
 ## Diagrama de Sequência: Definir Acesso
 
@@ -399,7 +399,7 @@ InterfaceUsuario -> Sistema: Registra permissões definidas
 
 ```
 
-![sequencia acesso](sequencia-acesso.png)
+![sequencia acesso](media/sequencia-acesso.png)
 
 ---
 
@@ -420,7 +420,7 @@ AccessManagementUI -> System: Register defined permissions
 @enduml
 ```
 
-![](case12.png)
+![](media/sequencia-revogar.png)
 
 ---
 
@@ -439,7 +439,7 @@ DocumentAccess -> System: Highlight text
 
 ```
 
-![](case13.png)
+![](media/sequencia-selecionar.png)
 
 ---
 
@@ -460,7 +460,7 @@ TranslationService -> System: Return translated text
 @enduml
 ```
 
-![](case14.png)
+![](media/sequencia-traduzir.png)
 
 ---
 
@@ -478,6 +478,8 @@ User -> BatchEditSelection: Choose documents
 
 ```
 
+![](media/sequencia-selecionar.png)
+
 ---
 
 ## Diagrama de Sequência: Escolher Edições em Lote
@@ -493,6 +495,8 @@ User -> BatchEditSelection: Choose edits
 @enduml
 
 ```
+
+![](media/sequencia-lote.png)
 
 ---
 
@@ -511,6 +515,6 @@ ApplyEdits -> System: Apply selected edits to documents
 
 ```
 
----
+## ![](media/sequencia-aplicar.png)
 
 Estes são exemplos simples de diagramas de sequência para alguns dos casos de uso que você forneceu. Eles representam interações entre atores, interfaces do usuário, serviços e o sistema. Lembre-se de que você pode ajustar os diagramas para refletir com mais precisão as ações e interações específicas do seu sistema.

@@ -16,7 +16,7 @@ Ator --> UC
 @enduml
 ```
 
-![](case01.png)
+![](media/case01.png)
 
 ### 2.2. Exemplo de Casos de Uso
 
@@ -30,7 +30,7 @@ Usuario --> Criar
 @enduml
 ```
 
-![](case02.png)
+![](media/case02.png)
 
 ## 3. Diagrama de Classes
 
@@ -47,7 +47,7 @@ class NomeDaClasse {
 @enduml
 ```
 
-![](case03.png)
+![](media/classe01.png)
 
 ### 3.2. Exemplo de Diagrama de Classes
 
@@ -67,7 +67,7 @@ Usuario -- Arquivo
 @enduml
 ```
 
-![](case04.png)
+![](media/classe02.png)
 
 ## 4. Diagrama de Sequência
 
@@ -81,7 +81,7 @@ Ator -> Participante: Ação
 @enduml
 ```
 
-![](case05.png)
+![](media/sequencia01.png)
 
 ### 4.2. Exemplo de Diagrama de Sequência
 
@@ -102,7 +102,7 @@ ServicoArmazenamento -> Sistema: Registra metadados do arquivo
 @enduml
 ```
 
-![](case06.png)
+![](media/sequencia02.png)
 
 ## 5. Diagrama de Atividades
 
@@ -122,7 +122,7 @@ end
 @enduml
 ```
 
-![](case07.png)
+![](media/atividade01.png)
 
 ### 5.2. Exemplo de Diagrama de Atividades
 
@@ -145,7 +145,7 @@ stop
 @enduml
 ```
 
-![](case08.png)
+![](media/atividade02.png)
 
 ## 6. Diagrama Entidade-Relacionamento (DER)
 
@@ -165,7 +165,7 @@ Entidade1 --|> Entidade2
 @enduml
 ```
 
-![](case09.png)
+![](media/der01.png)
 
 ### 6.2. Exemplo de Diagrama Entidade-Relacionamento
 
@@ -183,7 +183,7 @@ Usuario -- Arquivo
 @enduml
 ```
 
-## ![](case10.png)
+## ![](media/der02.png)
 
 Esse tutorial cobriu os diagramas UML mais comuns. Lembre-se de que o PlantUML oferece uma grande flexibilidade para personalização e detalhamento. À medida que você se familiariza com a sintaxe, você pode adicionar mais detalhes e personalizar ainda mais seus diagramas.
 

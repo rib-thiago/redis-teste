@@ -2,7 +2,7 @@
 
 Aqui está um possível diagrama de classes para a aplicação, com base no exemplo de funcionamento descrito no documento "funcionamento-aplicacao.md". Lembre-se de que este é apenas um exemplo ilustrativo e a estrutura real pode variar de acordo com a complexidade do projeto
 
-![Diagrama de Classes](media/esboco.png)
+![Diagrama de Classes](../media/esboco.png)
 
 Este diagrama de classes representa as principais entidades e seus relacionamentos no contexto do exemplo de funcionamento da aplicação. Aqui estão algumas explicações sobre as entidades, métodos e relacionamentos presentes no diagrama:
 
